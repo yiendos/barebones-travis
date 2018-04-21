@@ -27,7 +27,7 @@ before_install:
 - $TRAVIS_BUILD_DIR/scripts/travis/before_install.sh
 
 script:
-- codecept run acceptance --env=travis --debug
+- codecept run acceptance --env=travis
 
 env:
   matrix:
