@@ -40,6 +40,7 @@ joomla plugin:install joomlatools/console-joomlatools:dev-master
 echo "Installing Joomla $JOOMLA"
 joomla site:create --projects-dir=$PROJECT_DIR --release=$JOOMLA --www=$DOCUMENTROOT --mysql-login="root" home
 
-## starting in built server
 echo "Starting the PHP webserver"
-php -S localhost:8080 -t $TRAVIS_BUILD_DIR >/dev/null 2>&1 &
+php -S localhost:8080 -t $DOCUMENTROOT/home  >/dev/null 2>&1 &
+
+cd $TRAVIS_BUILD_DIR
