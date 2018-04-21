@@ -1,0 +1,25 @@
+env:
+    travis:
+       modules:
+          config:
+              WebDriver:
+                url: 'http://localhost:8080/'
+                browser: 'chrome'
+                port: 9515
+                wait: 7
+                restart: true
+                window_size: false
+                capabilities:
+                  chromeOptions:
+                    args: ['--headless', '--disable-gpu', '--no-sandbox', '--disable-impl-side-painting', '--window-size=1024x1024']
+                    binary: '/usr/bin/google-chrome-stable'
+              Db:
+                dsn: 'mysql:host=localhost;dbname=sites_textman'
+                user: 'root'
+                password: ''
+                dump: 'tests/_data/dump.sql'
+                populate: true
+                cleanup: true
+                populator: 'mysql -u $user -h $host $dbname < $dump'
+              Helper\MailCatcherHelper:
+                email_url: 'http://127.0.0.1:1080/messages'
