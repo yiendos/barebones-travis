@@ -14,7 +14,7 @@ env:
                     args: ['--headless', '--disable-gpu', '--no-sandbox', '--disable-impl-side-painting', '--window-size=1024x1024']
                     binary: '/usr/bin/google-chrome-stable'
               Db:
-                dsn: 'mysql:host=localhost;dbname=sites_textman'
+                dsn: 'mysql:host=localhost;dbname=sites_home'
                 user: 'root'
                 password: ''
                 dump: 'tests/_data/dump.sql'
