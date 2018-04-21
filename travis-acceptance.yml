@@ -4,6 +4,7 @@ env:
           config:
               WebDriver:
                 url: 'http://localhost:8080/'
+                travis_site: 'home',
                 browser: 'chrome'
                 port: 9515
                 wait: 7
