@@ -20,7 +20,7 @@ branches:
   - staging
 
 before_install:
-- export PATH=$PATH:/home/travis/.composer/vendor/bin/
+- export PATH=$PATH:/home/travis/.config/composer/vendor/bin/
 - export DOCUMENTROOT=/tmp/www/
 - export PROJECT_DIR=$(dirname "$TRAVIS_BUILD_DIR")
 - chmod +x $TRAVIS_BUILD_DIR/scripts/travis/before_install.sh
