@@ -2,6 +2,15 @@
 
 set -e
 
+##
+# Install the build tools
+##
+
+echo "Install Phing"
+pear channel-discover pear.phing.info
+pear install phing/phing
+phpenv rehash
+
 ## config php
 echo "Configure PHP"
 phpenv config-rm xdebug.ini
@@ -19,20 +28,17 @@ unzip /tmp/chromedriver.zip -d /home/travis/
 chmod +x /home/travis/chromedriver
 /home/travis/chromedriver --verbose --log-path=/tmp/chromedriver.log --url-base=/wd/hub &
 
+echo "Starting MailCatcher"
+gem install --no-ri --no-rdoc mailcatcher
+mailcatcher > /dev/null 2>&1 &
+
 echo "Installing the test dependencies"
 mkdir -p $DOCUMENTROOT $PROJECT_DIR
 composer global require --no-interaction codeception/codeception:2.3.4 facebook/webdriver:1.4.1 flow/jsonpath joomlatools/console
 joomla plugin:install joomlatools/console-joomlatools:dev-master
 
-DEPENDENCIES=('joomlatools-framework' 'joomlatools-framework-files' 'joomlatools-framework-activities' 'joomlatools-framework-scheduler' 'joomlatools-framework-ckeditor' 'joomlatools-framework-tags' 'joomlatools-framework-migrator' 'joomlatools-ui' 'logman' 'fileman' 'connect')
-for DEPENDENCY in "${DEPENDENCIES[@]}"
-do
-  git clone -q -b master git@github.com:joomlatools/$DEPENDENCY.git $PROJECT_DIR/$DEPENDENCY
-done
-
 echo "Installing Joomla $JOOMLA"
-joomla site:create --projects-dir=$PROJECT_DIR --release=$JOOMLA --symlink=textman,logman,fileman,connect --www=$DOCUMENTROOT --mysql-login="root" home
-
+joomla site:create --projects-dir=$PROJECT_DIR --release=$JOOMLA --www=$DOCUMENTROOT --mysql-login="root" home
 
 ## starting in built server
 echo "Starting the PHP webserver"

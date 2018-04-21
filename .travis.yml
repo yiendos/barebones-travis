@@ -26,3 +26,7 @@ before_install:
 
 script:
 - codecept run acceptance --env=travis --debug
+
+env:
+  matrix:
+    - JOOMLA=3.8
