@@ -18,7 +18,6 @@ env:
                 dsn: 'mysql:host=localhost;dbname=sites_home'
                 user: 'root'
                 password: ''
-                dump: 'tests/_data/dump.sql'
                 populate: true
                 cleanup: true
                 populator: 'mysql -u $user -h $host $dbname < $dump'
